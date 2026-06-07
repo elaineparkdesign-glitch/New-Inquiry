@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elaine Park Design - Service Inquiry Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0052CC 0%, #4D94FF 25%, #FF69B4 75%, #FF1493 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #0052CC 0%, #4D94FF 25%, #FF69B4 75%, #FF1493 100%);
+            padding: 40px 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .header-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            opacity: 0.95;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .header-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .header-description {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 15px;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 40px 30px;
+        }
+
+        .form-intro {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .section-header {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        .section-header:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        label {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #0052CC;
+            box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+            background-color: #F8FBFF;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 0;
+        }
+
+        .form-row input,
+        .form-row select {
+            margin-bottom: 0;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            cursor: pointer;
+            accent-color: #0052CC;
+            width: 18px;
+            height: 18px;
+        }
+
+        .checkbox-item label {
+            margin-bottom: 0;
+            font-weight: 500;
+            text-transform: none;
+            letter-spacing: normal;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #F8FBFF;
+            border-left: 4px solid #0052CC;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .info-box strong {
+            color: #0052CC;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Button Section */
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        button {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #0052CC, #FF69B4);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 82, 204, 0.3);
+        }
+
+        .btn-reset {
+            background: #F5F5F5;
+            color: #333;
+            border: 1px solid #E0E0E0;
+        }
+
+        .btn-reset:hover {
+            background: #EFEFEF;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #0052CC;
+            background: linear-gradient(135deg, #F8FBFF 0%, #FFF5F9 100%);
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .pricing-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #0052CC;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .pricing-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pricing-table {
+            width: 100%;
+            margin-bottom: 25px;
+            border-collapse: collapse;
+        }
+
+        .pricing-table th {
+            background: linear-gradient(135deg, #0052CC, #4D94FF);
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .pricing-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #E0E0E0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+        }
+
+        .pricing-table tr:hover {
+            background: rgba(0, 82, 204, 0.05);
+        }
+
+        .pricing-table tr:last-child td {
+            border-bottom: none;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .price-amount {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #0052CC;
+        }
+
+        .pricing-note {
+            background: white;
+            border-left: 4px solid #FF69B4;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #555;
+            margin-top: 20px;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 30px;
+            background: #F8FBFF;
+            border-top: 1px solid #E0E0E0;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .footer strong {
+            font-family: 'Poppins', sans-serif;
+            color: #0052CC;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header-title {
+                font-size: 24px;
+            }
+
+            .form-section {
+                padding: 25px 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .pricing-section {
+                padding: 20px;
+            }
+
+            .pricing-title {
+                font-size: 16px;
+            }
+
+            .pricing-table {
+                font-size: 12px;
+            }
+
+            .pricing-table td,
+            .pricing-table th {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-subtitle">Elaine Park Design</div>
+            <div style="font-family: 'Montserrat', sans-serif; font-size: 11px; color: rgba(255,255,255,0.9); margin-bottom: 15px; letter-spacing: 1px;">
+                <a href="https://copyfol.io/v/elainedesign" target="_blank" style="color: rgba(255,255,255,0.95); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.5); transition: all 0.3s;">
+                    https://copyfol.io/v/elainedesign
+                </a>
+            </div>
+            <div class="header-title">Service Inquiry Form</div>
+            <div class="header-description">Pop Up Booth Graphics • Trade Show Design</div>
+        </div>
+
+        <!-- Form -->
+        <div class="form-section">
+            <div class="form-intro">
+                Thank you for your interest! To provide you with an accurate quote and timeline, please fill out this form and send it back to me. <strong>I'll deliver a detailed estimate within 24 hours.</strong>
+            </div>
+
+            <form id="inquiryForm">
+
+                <!-- Section 01 -->
+                <div class="section-header">01 / Contact Information</div>
+
+                <div class="form-row">
+                    <div>
+                        <label>Company Name *</label>
+                        <input type="text" placeholder="Your company" required>
+                    </div>
+                    <div>
+                        <label>Contact Name *</label>
+                        <input type="text" placeholder="Your name" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label>Email *</label>
+                        <input type="email" placeholder="your@email.com" required>
+                    </div>
+                    <div>
+                        <label>Phone</label>
+                        <input type="text" placeholder="(213) 700-3246">
+                    </div>
+                </div>
+
+                <!-- Section 02 -->
+                <div class="section-header">02 / Booth Specifications</div>
+
+                <div class="form-row">
+                    <div>
+                        <label>Booth Size *</label>
+                        <select required>
+                            <option value="">Select size</option>
+                            <option value="10x10">10x10</option>
+                            <option value="10x20">10x20</option>
+                            <option value="10x30">10x30</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Booth System *</label>
+                        <select required>
+                            <option value="">Select system</option>
+                            <option value="WT">WT System</option>
+                            <option value="Beacon">Beacon</option>
+                            <option value="Brightline">Brightline</option>
+                            <option value="BeMatrix">BeMatrix</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label>Show Date / Booth Setup *</label>
+                        <input type="date" required>
+                    </div>
+                    <div>
+                        <label>Show Location</label>
+                        <input type="text" placeholder="City, State">
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="single" name="panels" value="single">
+                        <label for="single">Single-sided</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="double" name="panels" value="double">
+                        <label for="double">Double-sided</label>
+                    </div>
+                </div>
+
+                <!-- Section 03 -->
+                <div class="section-header">03 / Service Selection</div>
+
+                <div class="info-box">
+                    <strong>Timeline Note:</strong> Your graphic files must reach the printer ~2.5 weeks before booth setup. I'll calculate your Design Due Date based on your Show Date.
+                </div>
+
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="full-creative" name="service" value="full-creative" required>
+                        <label for="full-creative"><strong>Full Creative</strong> (8-12 days)</label>
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="ai-conversion" name="service" value="ai-conversion">
+                        <label for="ai-conversion"><strong>AI Conversion</strong> (3-5 days)</label>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>Transform your AI-generated files into professional prints:</strong> Do you have images or designs from ChatGPT, DALL-E, Midjourney, Adobe Firefly, or other AI tools? I convert your AI-generated mockups, sketches, or artwork into print-ready professional graphics. Includes file format optimization, color correction, image upscaling, and layout refinement. <strong>Perfect for:</strong> AI mockups, Canva designs, PowerPoint concepts, hand-drawn sketches, or any non-professional design that needs professional finishing.
+                </div>
+
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="24-hour" name="service" value="24-hour">
+                        <label for="24-hour"><strong>24-Hour Urgent</strong> (+$250)</label>
+                    </div>
+                </div>
+
+                <label>Do you have mockups/sketches/logo files? *</label>
+                <select required>
+                    <option value="">Select</option>
+                    <option value="yes">Yes, I have design mockups ready</option>
+                    <option value="logo-only">Logo only</option>
+                    <option value="no">No, starting from scratch</option>
+                </select>
+
+                <!-- Section 04 -->
+                <div class="section-header">04 / Messaging & Additional Services</div>
+
+                <label>Booth Message / Main Copy (if available)</label>
+                <textarea placeholder="Example: 'Discover Elias Research' or 'The Future of Data'"></textarea>
+
+                <label>Additional Notes or Questions</label>
+                <textarea placeholder="Tell us anything else we should know..."></textarea>
+
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="copy-writing" name="services" value="copy-writing">
+                        <label for="copy-writing">I need copy writing help (+$300)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="logo-vectorization" name="services" value="logo-vectorization">
+                        <label for="logo-vectorization">I need logo vectorization ($200)</label>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="button-group">
+                    <button type="submit" class="btn-submit">Send Inquiry</button>
+                    <button type="reset" class="btn-reset">Clear Form</button>
+                </div>
+            </form>
+
+            <!-- Pricing Reference Section -->
+            <div class="pricing-section">
+                <div class="pricing-title">💰 Design Pricing Reference</div>
+                <div class="pricing-subtitle">See our full pricing structure below</div>
+
+                <div style="margin-bottom: 25px;">
+                    <div style="font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; color: #333; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px;">Full Creative Design</div>
+                    <table class="pricing-table">
+                        <tr>
+                            <th>Booth Size</th>
+                            <th>WT System</th>
+                            <th>Beacon</th>
+                            <th>Brightline</th>
+                            <th>Other*</th>
+                        </tr>
+                        <tr>
+                            <td><strong>10x10</strong></td>
+                            <td class="price-amount">$1,000</td>
+                            <td class="price-amount">$1,200</td>
+                            <td class="price-amount">$1,000</td>
+                            <td class="price-amount">$1,200</td>
+                        </tr>
+                        <tr>
+                            <td><strong>10x20</strong></td>
+                            <td class="price-amount">$1,200</td>
+                            <td class="price-amount">$1,500</td>
+                            <td class="price-amount">$1,200</td>
+                            <td class="price-amount">$1,500</td>
+                        </tr>
+                    </table>
+                    <div style="font-family: 'Montserrat', sans-serif; font-size: 11px; color: #666; margin-top: 8px;">* Includes custom design, 3D mockup, 3 revision rounds (4th onwards charged at hourly rate), all files (8-12 days)</div>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <div style="font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; color: #333; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px;">AI-Assisted Conversion</div>
+                    <table class="pricing-table">
+                        <tr>
+                            <th>Service</th>
+                            <th>Standard (3-5 days)</th>
+                            <th>24-Hour Urgent</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Single Panel</strong></td>
+                            <td class="price-amount">$650</td>
+                            <td class="price-amount">$900</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Each Additional Panel</strong></td>
+                            <td class="price-amount">+$200</td>
+                            <td class="price-amount">+$250</td>
+                        </tr>
+                    </table>
+                    <div style="font-family: 'Montserrat', sans-serif; font-size: 11px; color: #666; margin-top: 8px;">* Convert AI images, Canva, PowerPoint, or sketches to print-ready files</div>
+                </div>
+
+                <div>
+                    <div style="font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; color: #333; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px;">Add-On Services</div>
+                    <table class="pricing-table">
+                        <tr>
+                            <th>Service</th>
+                            <th>Price</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Copy Writing (Includes 1 revision)</strong></td>
+                            <td class="price-amount">$300</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Logo Vectorization</strong></td>
+                            <td class="price-amount">$200</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="pricing-note">
+                    <strong>Questions?</strong> Not sure which service is right for you? Call me at 213-700-3246 and we can discuss the best option for your timeline and budget.
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <strong>Next Steps:</strong> Fill out this form, reply to this email, and I'll send your <strong>detailed estimate within 24 hours.</strong>
+            <br><br>
+            Questions? Call me: <strong>213 700 3246</strong>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! I will review your information and send a custom quote within 24 hours.\n\nElaine Park | 213 700 3246');
+        });
+    </script>
+</body>
+</html>
