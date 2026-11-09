@@ -412,6 +412,12 @@
             </div>
 
             <form id="inquiryForm">
+                <!-- Web3Forms: paste your access key below (get it free at https://web3forms.com) -->
+                <input type="hidden" name="access_key" value="594e872a-6e98-4374-8c0a-a689b61476b5">
+                <input type="hidden" name="subject" value="New Booth Design Inquiry">
+                <input type="hidden" name="from_name" value="Elaine Park Design - Inquiry Form">
+                <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
 
                 <!-- Section 01 -->
                 <div class="section-header">01 / Contact Information</div>
@@ -419,22 +425,22 @@
                 <div class="form-row">
                     <div>
                         <label>Company Name *</label>
-                        <input type="text" placeholder="Your company" required>
+                        <input type="text" name="company" placeholder="Your company" required>
                     </div>
                     <div>
                         <label>Contact Name *</label>
-                        <input type="text" placeholder="Your name" required>
+                        <input type="text" name="name" placeholder="Your name" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div>
                         <label>Email *</label>
-                        <input type="email" placeholder="your@email.com" required>
+                        <input type="email" name="email" placeholder="your@email.com" required>
                     </div>
                     <div>
                         <label>Phone</label>
-                        <input type="text" placeholder="(213) 700-3246">
+                        <input type="tel" name="phone" placeholder="(213) 700-3246">
                     </div>
                 </div>
 
@@ -444,7 +450,7 @@
                 <div class="form-row">
                     <div>
                         <label>Booth Size *</label>
-                        <select required>
+                        <select name="booth_size" required>
                             <option value="">Select size</option>
                             <option value="10x10">10x10</option>
                             <option value="10x20">10x20</option>
@@ -454,7 +460,7 @@
                     </div>
                     <div>
                         <label>Booth System *</label>
-                        <select required>
+                        <select name="booth_system" required>
                             <option value="">Select system</option>
                             <option value="WT">WT System</option>
                             <option value="Beacon">Beacon</option>
@@ -468,11 +474,11 @@
                 <div class="form-row">
                     <div>
                         <label>Show Date / Booth Setup *</label>
-                        <input type="date" required>
+                        <input type="date" name="show_date" required>
                     </div>
                     <div>
                         <label>Show Location</label>
-                        <input type="text" placeholder="City, State">
+                        <input type="text" name="show_location" placeholder="City, State">
                     </div>
                 </div>
 
@@ -520,7 +526,7 @@
                 </div>
 
                 <label>Do you have mockups/sketches/logo files? *</label>
-                <select required>
+                <select name="has_mockups" required>
                     <option value="">Select</option>
                     <option value="yes">Yes, I have design mockups ready</option>
                     <option value="logo-only">Logo only</option>
@@ -531,18 +537,18 @@
                 <div class="section-header">04 / Messaging & Additional Services</div>
 
                 <label>Booth Message / Main Copy (if available)</label>
-                <textarea placeholder="Example: 'Discover Elias Research' or 'The Future of Data'"></textarea>
+                <textarea name="booth_message" placeholder="Example: 'Discover Elias Research' or 'The Future of Data'"></textarea>
 
                 <label>Additional Notes or Questions</label>
-                <textarea placeholder="Tell us anything else we should know..."></textarea>
+                <textarea name="notes" placeholder="Tell us anything else we should know..."></textarea>
 
                 <div class="checkbox-group">
                     <div class="checkbox-item">
-                        <input type="checkbox" id="copy-writing" name="services" value="copy-writing">
+                        <input type="checkbox" id="copy-writing" name="add_ons" value="copy-writing">
                         <label for="copy-writing">I need copy writing help (+$300)</label>
                     </div>
                     <div class="checkbox-item">
-                        <input type="checkbox" id="logo-vectorization" name="services" value="logo-vectorization">
+                        <input type="checkbox" id="logo-vectorization" name="add_ons" value="logo-vectorization">
                         <label for="logo-vectorization">I need logo vectorization ($200)</label>
                     </div>
                 </div>
@@ -552,6 +558,7 @@
                     <button type="submit" class="btn-submit">Send Inquiry</button>
                     <button type="reset" class="btn-reset">Clear Form</button>
                 </div>
+                <div id="formStatus" role="status" style="margin-top:15px;font-family:'Montserrat',sans-serif;font-size:14px;"></div>
             </form>
 
             <!-- Pricing Reference Section -->
@@ -635,16 +642,43 @@
 
         <!-- Footer -->
         <div class="footer">
-            <strong>Next Steps:</strong> Fill out this form, reply to this email, and I'll send your <strong>detailed estimate within 24 hours.</strong>
+            <strong>Next Steps:</strong> Submit this form and I'll send your <strong>detailed estimate within 24 hours.</strong>
             <br><br>
             Questions? Call me: <strong>213 700 3246</strong>
         </div>
     </div>
 
     <script>
-        document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+        const form = document.getElementById('inquiryForm');
+        const statusEl = document.getElementById('formStatus');
+        const btn = form.querySelector('.btn-submit');
+        form.addEventListener('submit', async function (e) {
             e.preventDefault();
-            alert('Thank you! I will review your information and send a custom quote within 24 hours.\n\nElaine Park | 213 700 3246');
+            const fd = new FormData(form);
+            const data = {};
+            for (const [k, v] of fd.entries()) {
+                data[k] = (k in data) ? data[k] + ', ' + v : v;   // keep every checked box
+            }
+            if (data.company) data.subject = 'New Booth Inquiry - ' + data.company;
+            btn.disabled = true; btn.textContent = 'Sending...';
+            statusEl.style.color = '#333'; statusEl.textContent = '';
+            try {
+                const res = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const json = await res.json();
+                if (!res.ok || !json.success) throw new Error(json.message || 'Send failed');
+                form.reset();
+                statusEl.style.color = '#1a7f37';
+                statusEl.textContent = 'Thank you! Your inquiry was sent. I will send a custom quote within 24 hours. — Elaine Park | 213 700 3246';
+            } catch (err) {
+                statusEl.style.color = '#c62828';
+                statusEl.textContent = 'Sorry, your inquiry could not be sent. Please call 213-700-3246.';
+            } finally {
+                btn.disabled = false; btn.textContent = 'Send Inquiry';
+            }
         });
     </script>
 </body>
